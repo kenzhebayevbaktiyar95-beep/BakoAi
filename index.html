@@ -1,8 +1,12 @@
-<!DOCTYPE html>
-<html lang="kk"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>BakoAi - Super AI Platform</title>
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:system-ui;background:#0a0a0f;color:#fff}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,sans-serif;background:#0a0a0f;color:#fff}
 .top{position:sticky;top:0;z-index:100;background:rgba(10,10,15,.9);backdrop-filter:blur(12px);border-bottom:1px solid #222;padding:12px 16px;display:flex;justify-content:space-between;align-items:center}
 .logo{font-weight:900;font-size:24px;background:linear-gradient(90deg,#8b5cf6,#ec4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .hero{max-width:1100px;margin:auto;padding:40px 20px;display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center}
@@ -10,57 +14,198 @@
 .h1{font-size:42px;font-weight:900;line-height:1.1}
 .h1 span{background:linear-gradient(90deg,#8b5cf6,#06ffa5);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .video-banner{border-radius:20px;overflow:hidden;border:2px solid #333;position:relative;background:#111}
-.video-banner video,.video-banner img{width:100%;display:block}
-.badge{position:absolute;top:12px;left:12px;background:#ff0000;color:#fff;padding:4px 10px;border-radius:6px;font-size:12px;font-weight:800}
+.video-banner img{width:100%;display:block}
+.badge{position:absolute;top:12px;left:12px;background:#ff0000;color:#fff;padding:4px 10px;border-radius:6px;font-size:12px;font-weight:800;z-index:2}
 .tools{max-width:1100px;margin:20px auto;padding:0 20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}
 .tool{background:#16161f;border:1px solid #2a2a3a;border-radius:16px;padding:16px;text-align:center;cursor:pointer;transition:.2s}
 .tool:hover{border-color:#8b5cf6;transform:translateY(-3px)}
+.tool.active{border-color:#06ffa5;background:#1a2a1f}
 .tool .ic{font-size:28px}
 .tool b{display:block;margin-top:8px;font-size:13px}
-.maqal{background:linear-gradient(135deg,#1a1a2e,#16213e);border:1px solid #2a2a5a;border-radius:16px;padding:18px;margin:20px auto;max-width:1100px;text-align:center}
+.maqal{background:linear-gradient(135deg,#1a1a2e,#16213e);border:1px solid #2a2a5a;border-radius:16px;padding:18px;margin:20px auto;max-width:1100px;text-align:center;transition:.4s}
 .chatbox{max-width:750px;margin:30px auto;background:#11111a;border:1px solid #2a2a3a;border-radius:24px;overflow:hidden}
 .chat{height:380px;overflow-y:auto;padding:20px}
-.msg{padding:12px 16px;border-radius:16px;margin:8px 0;max-width:85%;line-height:1.5}
+.msg{padding:12px 16px;border-radius:16px;margin:8px 0;max-width:85%;line-height:1.5;animation:fade .3s}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
 .ai{background:#1e1e2f;color:#e2e2ff}
-.me{background:#6e00ff;color:#fff;float:right;clear:both}
+.me{background:#6e00ff;color:#fff;margin-left:auto}
 .bottom{display:flex;gap:8px;padding:12px;background:#0f0f18;border-top:1px solid #222}
-.bottom input{flex:1;padding:14px 18px;border-radius:30px;border:1px solid #333;background:#1a1a28;color:#fff}
-.bottom button{padding:14px 22px;border-radius:30px;border:0;background:#6e00ff;color:#fff;font-weight:800}
+.bottom input{flex:1;padding:14px 18px;border-radius:30px;border:1px solid #333;background:#1a1a28;color:#fff;outline:none}
+.bottom input:focus{border-color:#8b5cf6}
+.bottom button{padding:14px 22px;border-radius:30px;border:0;background:#6e00ff;color:#fff;font-weight:800;cursor:pointer;transition:.2s}
+.bottom button:hover{background:#8b2cff}
 .people{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:20px auto;max-width:1100px;padding:0 20px}
 .people div{border-radius:16px;overflow:hidden;border:1px solid #333;position:relative}
 .people img{width:100%;height:140px;object-fit:cover}
 .people span{position:absolute;bottom:6px;left:8px;background:rgba(0,0,0,.7);padding:2px 8px;border-radius:10px;font-size:11px}
-</style></head><body>
-<div class="top"><div class="logo">🧠 BakoAi SUPER</div><div><span style="background:#22c55e;color:#000;padding:4px 10px;border-radius:20px;font-size:12px;font-weight:800">● 1,247 онлайн</span></div></div>
+.footer{text-align:center;padding:30px;opacity:.4;font-size:12px}
+.typing{opacity:.6;font-style:italic}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <div class="logo">🧠 BakoAi SUPER</div>
+  <div><span style="background:#22c55e;color:#000;padding:4px 10px;border-radius:20px;font-size:12px;font-weight:800">● <span id="online">1,247</span> онлайн</span></div>
+</div>
 
 <div class="hero">
-<div>
-<div class="h1">Қандыағаштан шыққан <span>тұңғыш SUPER AI</span></div>
-<p style="opacity:.7;margin-top:12px">ChatGPT, Gemini, Claude, Higgsfield, Cursor, Lovable — бәрі бір жерде! Видео, реклама, фото, код — бәрін жасайды.</p>
-<div style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap">
-<span style="background:#1e1e2f;border:1px solid #333;padding:6px 12px;border-radius:20px;font-size:12px">🎬 Higgsfield</span>
-<span style="background:#1e1e2f;border:1px solid #333;padding:6px 12px;border-radius:20px;font-size:12px">💬 ChatGPT</span>
-<span style="background:#1e1e2f;border:1px solid #333;padding:6px 12px;border-radius:20px;font-size:12px">🎨 Stitch</span>
-<span style="background:#1e1e2f;border:1px solid #333;padding:6px 12px;border-radius:20px;font-size:12px">⚡ Lovable</span>
-</div>
-</div>
-<div class="video-banner">
-<div class="badge">🔴 LIVE • РЕКЛАМА</div>
-<img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600" alt="AI video">
-<div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,black);padding:30px 16px 12px;font-weight:800">BakoAi арқылы жасалған видео реклама 🚀</div>
-</div>
+  <div>
+    <div class="h1">Қандыағаштан шыққан <span>тұңғыш SUPER AI</span></div>
+    <p style="opacity:.7;margin-top:12px">ChatGPT, Gemini, Claude, Higgsfield, Cursor, Lovable — бәрі бір жерде! Видео, реклама, фото, код — бәрін жасайды.</p>
+    <div style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap">
+      <span style="background:#1e1e2f;border:1px solid #333;padding:6px 12px;border-radius:20px;font-size:12px">🎬 Higgsfield</span>
+      <span style="background:#1e1e2f;border:1px solid #333;padding:6px 12px;border-radius:20px;font-size:12px">💬 ChatGPT</span>
+      <span style="background:#1e1e2f;border:1px solid #333;padding:6px 12px;border-radius:20px;font-size:12px">🎨 Stitch</span>
+      <span style="background:#1e1e2f;border:1px solid #333;padding:6px 12px;border-radius:20px;font-size:12px">⚡ Lovable</span>
+    </div>
+  </div>
+  <div class="video-banner">
+    <div class="badge">🔴 LIVE • РЕКЛАМА</div>
+    <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600" alt="AI video">
+    <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,black);padding:30px 16px 12px;font-weight:800">BakoAi арқылы жасалған видео реклама 🚀</div>
+  </div>
 </div>
 
 <div class="maqal" id="maqal">📜 <b>Бүгінгі мақал:</b> <span id="maqalText">Білімдіге дүние жарық.</span></div>
 
 <div class="people">
-<div><img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400"><span>👩‍🎓 Студенттер қолдануда</span></div>
-<div><img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=400"><span>💼 Бизнес реклама жасауда</span></div>
-<div><img src="https://images.unsplash.com/photo-1531482615713-2afd690979bc?w=400"><span>🎥 Видео жасауда</span></div>
+  <div><img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400" alt="students"><span>👩‍🎓 Студенттер қолдануда</span></div>
+  <div><img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=400" alt="business"><span>💼 Бизнес реклама жасауда</span></div>
+  <div><img src="https://images.unsplash.com/photo-1531482615713-2afd690979bc?w=400" alt="video"><span>🎥 Видео жасауда</span></div>
 </div>
 
 <div class="tools">
-<div class="tool" onclick="setTool('higgsfield')"><div class="ic">🎬</div><b>Higgsfield</b><small style="opacity:.6">Видео AI</small></div>
-<div class="tool" onclick="setTool('chatgpt')"><div class="ic">💬</div><b>ChatGPT</b><small style="opacity:.6">Чат</small></div>
-<div class="tool" onclick="setTool('gemini')"><div class="ic">✨</div><b>Gemini</b><small style="opacity:.6">Google AI</small></div>
-<div class="tool" onclick="setTool('cl
+  <div class="tool" data-tool="higgsfield" onclick="setTool('higgsfield',this)"><div class="ic">🎬</div><b>Higgsfield</b><small style="opacity:.6">Видео AI</small></div>
+  <div class="tool" data-tool="chatgpt" onclick="setTool('chatgpt',this)"><div class="ic">💬</div><b>ChatGPT</b><small style="opacity:.6">Чат</small></div>
+  <div class="tool" data-tool="gemini" onclick="setTool('gemini',this)"><div class="ic">✨</div><b>Gemini</b><small style="opacity:.6">Google AI</small></div>
+  <div class="tool" data-tool="claude" onclick="setTool('claude',this)"><div class="ic">🧩</div><b>Claude</b><small style="opacity:.6">Анализ</small></div>
+  <div class="tool" data-tool="cursor" onclick="setTool('cursor',this)"><div class="ic">⌨️</div><b>Cursor</b><small style="opacity:.6">Код</small></div>
+  <div class="tool" data-tool="lovable" onclick="setTool('lovable',this)"><div class="ic">⚡</div><b>Lovable</b><small style="opacity:.6">Сайт</small></div>
+</div>
+
+<div class="chatbox">
+  <div class="chat" id="chat">
+    <div class="msg ai">Сәлем! Мен BakoAi — қазақ тілінде сөйлейтін супер AI. Қандай көмек керек? 🚀</div>
+  </div>
+  <div class="bottom">
+    <input id="inp" placeholder="Хабарлама жазыңыз..." onkeydown="if(event.key==='Enter')send()">
+    <button onclick="send()">Жіберу ➤</button>
+  </div>
+</div>
+
+<div class="footer">© 2025 BakoAi SUPER • Қандыағаш, Қазақстан 🇰🇿</div>
+
+<script>
+// ===== Құрал таңдау =====
+let currentTool = 'chatgpt';
+const toolNames = {
+  higgsfield:'🎬 Higgsfield (Видео AI)',
+  chatgpt:'💬 ChatGPT',
+  gemini:'✨ Gemini',
+  claude:'🧩 Claude',
+  cursor:'⌨️ Cursor',
+  lovable:'⚡ Lovable'
+};
+
+function setTool(tool, el){
+  currentTool = tool;
+  document.querySelectorAll('.tool').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  addMsg('ai', `✅ ${toolNames[tool]} таңдалды. Енді осы режимде жауап беремін!`);
+}
+
+// ===== Мақалдар =====
+const maqaldar = [
+  "Білімдіге дүние жарық.",
+  "Еңбек етсең ерінбей, тояды қарның тіленбей.",
+  "Оқу — инемен құдық қазғандай.",
+  "Бірлік болмай, тірлік болмайды.",
+  "Жеті рет өлшеп, бір рет кес.",
+  "Атаңның баласы болма, адамның баласы бол.",
+  "Тіл — қоғамды біріктіретін құрал."
+];
+let mi = 0;
+setInterval(()=>{
+  const el = document.getElementById('maqalText');
+  el.style.opacity = 0;
+  setTimeout(()=>{
+    mi = (mi+1) % maqaldar.length;
+    el.textContent = maqaldar[mi];
+    el.style.opacity = 1;
+  }, 400);
+}, 5000);
+document.getElementById('maqalText').style.transition = 'opacity .4s';
+
+// ===== Онлайн саны =====
+setInterval(()=>{
+  const base = 1247;
+  const change = Math.floor(Math.random()*21) - 10;
+  document.getElementById('online').textContent = base + change;
+}, 3000);
+
+// ===== Чат =====
+function addMsg(type, text){
+  const chat = document.getElementById('chat');
+  const div = document.createElement('div');
+  div.className = 'msg ' + type;
+  div.textContent = text;
+  chat.appendChild(div);
+  chat.scrollTop = chat.scrollHeight;
+  return div;
+}
+
+// Қарапайым жауап генераторы
+function generateReply(text){
+  const t = text.toLowerCase();
+  
+  if(t.includes('сәлем') || t.includes('салам') || t.includes('привет')){
+    return "Сәлеметсіз бе! 👋 Мен BakoAi. Қалай көмектесе аламын?";
+  }
+  if(t.includes('видео') || t.includes('ролик')){
+    return "🎬 Видео жасау үшін Higgsfield құралын таңдаңыз. Маған тақырыпты айтыңыз, мен сценарий жасап беремін!";
+  }
+  if(t.includes('сайт') || t.includes('код') || t.includes('бағдарлама')){
+    return "⚡ Сайт немесе код жасау үшін Cursor/Lovable режимін қосыңыз. HTML, CSS, JS — бәрін жасаймын!";
+  }
+  if(t.includes('реклама')){
+    return "📢 Реклама мәтінін жасаймын! Өнімнің атын және мақсатты аудиторияны айтыңыз.";
+  }
+  if(t.includes('мақал')){
+    return "📜 Бүгінгі мақал: «" + maqaldar[mi] + "»";
+  }
+  if(t.includes('рақмет') || t.includes('спасибо')){
+    return "Оқасы жоқ! 😊 Тағы сұрағыңыз болса, жазыңыз.";
+  }
+  if(t.includes('кім') || t.includes('сен кім')){
+    return "Мен BakoAi — Қандыағаштан шыққан тұңғыш супер AI! 🧠 ChatGPT, Gemini, Claude мүмкіндіктерін біріктіргенмін.";
+  }
+  
+  const answers = [
+    "Жақсы сұрақ! 🤔 Толығырақ айтып бере аласыз ба?",
+    "Түсіндім. Осы тақырыпта нақты не істегіңіз келеді?",
+    `"${text}" — бұл қызықты тақырып! Мен ${toolNames[currentTool]} режимінде жауап беремін.`,
+    "Керемет! Мен саған көмектесе аламын. Тапсырманы нақтылаңыз.",
+    "🚀 Түсінікті! Жалғастырайық."
+  ];
+  return answers[Math.floor(Math.random()*answers.length)];
+}
+
+function send(){
+  const inp = document.getElementById('inp');
+  const text = inp.value.trim();
+  if(!text) return;
+  addMsg('me', text);
+  inp.value = '';
+  
+  const typing = addMsg('ai', '...');
+  typing.classList.add('typing');
+  
+  setTimeout(()=>{
+    typing.remove();
+    addMsg('ai', generateReply(text));
+  }, 800 + Math.random()*600);
+}
+</script>
+</body>
+</html>
